@@ -1,0 +1,23 @@
+# Peano numbers
+
+load "./examples/pre_ep06/std.noq"
+
+2 + 3 {
+  3       |  0
+  2       |  all
+  1       |  all
+  sum     |  all
+  sum     |  all
+  sum_id  |  all
+}
+
+(4 - 3) {
+  4       |  0
+  3       |  all
+  2       |  all
+  1       |  all
+  sub     |  all
+  sub     |  all
+  sub     |  all
+  sub_id  |  all
+}

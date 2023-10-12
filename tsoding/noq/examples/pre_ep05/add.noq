@@ -1,0 +1,10 @@
+# Adding two Peano numbers
+
+rule add0 add(0, A) = A               # base
+rule add add(s(A), B) = s(add(A, B))  # recursion
+
+shape add(s(s(0)), s(s(s(0))))        # 2 + 3
+  apply add
+  apply add
+  apply add0
+done
