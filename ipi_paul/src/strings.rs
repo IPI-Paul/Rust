@@ -5,16 +5,32 @@ use std::io::{Write, stdin, stdout};
 use clipboard::ClipboardProvider;
 use clipboard::ClipboardContext;
 
+pub fn outer_replace() {
+  let mut clip: ClipboardContext = ClipboardProvider::new().unwrap();
+  let from = (clip.get_contents().unwrap()).split("<-").collect::<Vec<&str>>()[0].trim().to_string();
+  let mut to = (clip.get_contents().unwrap()).split("<-").collect::<Vec<&str>>()[1].trim().to_string();
+  let mut res = String::new();
+  for (i, char) in from.chars().enumerate() {
+    if i == 0 {
+      res.push(to.chars().next().unwrap());
+    } else if i == from.len() - 1 {
+      res.push(to.pop().unwrap());
+    } else {
+      res.push(char);
+    }
+  }
+  clip.set_contents(res).unwrap();
+  std::thread::sleep(std::time::Duration::from_secs(10));
+}
+
 pub fn swap_around_clip(args: Vec<String>) {
-  use termion::color;
+  let mut clip: ClipboardContext = ClipboardProvider::new().unwrap();
   let mut res = String::new();
   let mut command;
   let keep;
   let lose;
-
-  if !args.is_empty() {
-    command = args.join(" ");
-  } else {
+  if !clip.get_contents().unwrap().replace(" ", "").replace("\n", "").contains("<-{swap:") && args.is_empty() {
+    use termion::color;
     command = String::new();
     println!(
       "\n\n{}When not in iteractive mode surround special characters {}|;&`\"'()\\#~<> {}with apostrophes '|' or quotes \"'\"{}.", 
@@ -27,6 +43,35 @@ pub fn swap_around_clip(args: Vec<String>) {
     stdout().flush().unwrap();
     stdin().read_line(&mut command).unwrap();
     command = command.replace('\n', "");
+  } else if clip.get_contents().unwrap().replace(" ", "").replace("\n", "").contains("<-{swap:") {
+    command = clip.get_contents()
+      .unwrap()
+      .split("<-")
+      .collect::<Vec<&str>>()[1]
+      .trim()
+      .to_string()
+      .replace("'", "")
+      .replace('"', "")
+      .replace("\n", "")
+      .replace("\t", "")
+      .replace("{", "")
+      .replace("}", "")
+      .replace("[", "")
+      .replace("]", "")
+      .replace(", ", " ")
+      .replace(",", " ")
+      .replace("swap:", "--swap")
+      .replace("unswapped:", "--unswapped")
+      .replace("remove:", "--remove")
+      .split_whitespace()
+      .into_iter()
+      .collect::<Vec<&str>>()
+      .join(" ")
+      .to_string();
+    let new_clip = clip.get_contents().unwrap().split("<-").collect::<Vec<&str>>()[0].trim().to_string();
+    clip.set_contents(new_clip).unwrap();
+  } else {
+    command = args.join(" ");
   }
 
   if command.split("--remove").collect::<Vec<&str>>().len() > 1 {
@@ -63,7 +108,7 @@ pub fn swap_around_clip(args: Vec<String>) {
         }
       }
       for del in lose.iter() {
-        new_line = line.replace(del, "");
+        new_line = new_line.replace(del, "");
       }
       if new_line.contains(&sep) {
         if keep.iter().any(|x| new_line.contains(x)) {
