@@ -67,7 +67,7 @@ Result will be:
 right_side  | and left_side
 ```
 
-## outerreplace
+## outer_replace
 
  - Used for trying out diferent enclosures when coding.
  - You can swap out the opening and closing parentheses, brackets with braces and visa versa.
