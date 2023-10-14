@@ -73,7 +73,6 @@ pub fn swap_around_clip(args: Vec<String>) {
   } else {
     command = args.join(" ");
   }
-
   if command.split("--remove").collect::<Vec<&str>>().len() > 1 {
     lose = String::from(command.split("--remove").collect::<Vec<&str>>()[1].trim().to_string());    
     command = command.split("--remove").collect::<Vec<&str>>()[0].trim().to_string();
@@ -86,6 +85,7 @@ pub fn swap_around_clip(args: Vec<String>) {
   } else {
     keep = String::new();
   }
+
   if command.split("--swap").collect::<Vec<&str>>().len() > 1 {
     let sep = command.split("--swap").collect::<Vec<&str>>()[1];
     let binding = keep.replace('\n', "");
@@ -94,7 +94,6 @@ pub fn swap_around_clip(args: Vec<String>) {
     let lost = lose.replace('\n', "");
     let lose = lost.split(" ").collect::<Vec<&str>>();
     
-    let mut clip: ClipboardContext = ClipboardProvider::new().unwrap();
     for line in format!("{}", clip.get_contents().unwrap()).split('\n') {
       let mut new_line = String::from(line);
       let mut to_keep = Vec::<String>::new();
