@@ -48,3 +48,45 @@ target/release/ipi_paul swaparoundclip --swap , --unswaped alphanumeric
 target/release/ipi_paul swaparoundclip --swap =
 target/release/ipi_paul swaparoundclip --swap AND
 ```
+Or, append to your code using <- to indicate the right hand side as parameters:
+```
+left_side | and not right_side
+<- {
+  swap: '|',
+  unswapped: ["and"],
+  remove: ["not"]
+}
+```
+Run app without additional paremeters:
+```
+cargo build --release
+target/release/ipi_paul swaparoundclip
+```
+Result will be:
+```
+right_side  | and left_side
+```
+
+## outerreplace
+
+ - Used for trying out diferent enclosures when coding.
+ - You can swap out the opening and closing parentheses, brackets with braces and visa versa.
+ - Works soley on the clipboard and uses the clipboard crate.
+ - To use add <- to indicate the right hand side to swap out with the left hand side.
+ - Add a Shortcut key combination to VS Code to run when terminal has already been initiated.
+
+### To run the App and call this function
+
+Add to your code, select and cut/copy:
+```
+(let x = 3) <- {}
+```
+Then run:
+```
+cargo build --release
+target/release/ipi_paul outerreplace
+```
+Paste the updated clipboard:
+```
+{let x = 3}
+```
