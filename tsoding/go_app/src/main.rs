@@ -152,7 +152,12 @@ fn client(stream: Arc<TcpStream>, messages: Sender<Message>) -> Result<()> {
             });
         })?;
         if n > 0 {
-            let bytes = buffer[0..n].to_vec();
+            let bytes = Vec::new();
+            for x in &buffer[0..n] {
+                if *x >= 32 {
+                    bytes.push(*x)
+                }
+            }
             messages.send(Message::NewMessage{author_addr, bytes}).map_err(|err| {
                 eprintln!("ERROR: could not send message to the server thread: {err}");
             })?;
