@@ -20,17 +20,6 @@
   - The discussion around Go Telemetry puts me off studying Go any further and it would be good to find further tutorials on building Rust solutions.
   - It would be good to learn more on building GUIs in Rust as the Warp YouTube video indicates that this is an area that needs vast improvement.
 
- [I rewrote My Go App in Rust](https://youtu.be/BbIEuNscn_E?si=9X0yaMvBKaJyHJqn)
-
- ## Course Work (go_app)
-
-  - This course gives further insight into the workings of TCP and sockets by building a chat app server.
-  - tsoding carried out a DDOS attack on the app being built and when following along and using the terminal in VS Code (Codium), it brought my system to a halt. Running both the App and the attack in the Linux terminal emulator did not bring the system to a halt.
-  - Having learnt how to build a Web App in Go and finding it quite easy, I am now interested to see if the same can be achieved in Rust.
-  - The Go App tsoding built and converted only used 158 lines of code, but in Rust it used 189 lines plus an additional line I thought preferrable.
-  - The discussion around Go Telemetry puts me off studying Go any further and it would be good to find further tutorials on building Rust solutions.
-  - It would be good to learn more on building GUIs in Rust as the Warp YouTube video indicates that this is an area that needs vast improvement.
-
 [My Viewers DDoSed my Rust App](https://youtu.be/Sw12N7-zqkk?si=Pz2nCF-XcXw5U96m)
 
 ## Course Work (server)
