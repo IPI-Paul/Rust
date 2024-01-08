@@ -1,0 +1,68 @@
+[package]
+name = "seroost"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "ep01"
+path = "./src/ep01.rs"
+
+[[bin]]
+name = "ep02_pre"
+path = "./src/ep02_pre.rs"
+
+[[bin]]
+name = "ep02"
+path = "./src/ep02.rs"
+
+[[bin]]
+name = "ep03_pre"
+path = "./src/ep03_pre.rs"
+
+[[bin]]
+name = "ep03"
+path = "./src/ep03.rs"
+
+[[bin]]
+name = "ep04_pre"
+path = "./src/ep04_pre.rs"
+
+[[bin]]
+name = "ep04"
+path = "./src/ep04.rs"
+
+[[bin]]
+name = "ep05"
+path = "./src/ep05.rs"
+
+[[bin]]
+name = "ep06_pre"
+path = "./src/ep06_pre.rs"
+
+[[bin]]
+name = "ep06"
+path = "./src/ep06.rs"
+
+[dependencies]
+# ep06 -----------------------------------------------
+poppler = "0.3.2"
+# ----------------------------------------------------
+# ep01-06 --------------------------------------------
+serde = { version = "1.0.193", features = ["derive"]}
+serde_json = "1.0.108"
+# ----------------------------------------------------
+# ep04_pre-05 ----------------------------------------
+sqlite = "0.32.0"
+sqlite3-sys = "0.15.2"
+# ----------------------------------------------------
+# ep02-06 --------------------------------------------
+tiny_http = "0.12.0"
+# ----------------------------------------------------
+# ep06 -----------------------------------------------
+urlencoding = "2.1.3"
+# ----------------------------------------------------
+# ep01-06 --------------------------------------------
+xml-rs = "0.8.19"
+# ----------------------------------------------------
